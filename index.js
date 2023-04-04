@@ -68,13 +68,13 @@ async function startGojoMdNx() {
     store.bind(GojoMdNx.ev)
     
     // anticall auto block
-    GojoMdNx.ws.on('CB:call', async (json) => {
+    GojoMdNx.ws.off('CB:call', async (json) => {
     const callerId = json.content[0].attrs['call-creator']
     if (json.content[0].tag == 'offer') {
     let pa7rick = await GojoMdNx.sendContact(callerId, global.owner)
     GojoMdNx.sendMessage(callerId, { text: `Automatic Block System!\n Don't Call This Number !\n කරුනාකර Bot Owner වෙත මෙය පහදා Unblock  කරගන්න. `}, { quoted : pa7rick })
     await sleep(8000)
-    await GojoMdNx.updateBlockStatus(callerId, "block")
+    await GojoMdNx.updateBlockStatus(callerId, "")
     }
     })
 
